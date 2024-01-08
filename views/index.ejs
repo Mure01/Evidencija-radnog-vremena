@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Dogadjaji</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+
+    <%- include('./navBar.ejs') %>
+<main class="mainIndex">
+
+  <form>
+    <input name="broj" type="number" id="broj" max="12" placeholder="Mjesec za izvjestaj">
+        <button type="submit">Trazi</button>
+    </form>
+    
+    <table id="podaciTabela">
+      <thead>
+        <tr>
+                <th>Ime</th>
+                <th>Prezime</th>
+                <th>Broj dana prisustva</th>
+                <th>Broj dana godisnjeg</th>
+                <th>Broj dana bolovanja</th>
+                <th>Broj dana odsustva</th>
+                <th>Broj dana sluzbenog puta</th>
+                <th>Broj dana ukupno</th>
+            </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="nemaPodataka" colspan="8" style="padding: 30px;">Pretrazite za podatke</td>
+          </tr>
+          <!-- Redovi će biti dodati ovde -->
+        </tbody>
+        
+        
+      </main>
+        
+        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+        
+    <script>
+        document.querySelector("form").addEventListener("submit", async e => {
+            e.preventDefault();
+            var uneseniBroj = $("#broj").val();
+
+            $.ajax({
+                type: "POST",
+                url: "/dohvatiIzvjestaj", 
+                data: { broj: uneseniBroj },
+                success: function(data) {
+                    console.log(data[0])
+                
+                    const podaci = data[0];
+                    var tabelaBody = document.getElementById("podaciTabela").getElementsByTagName('tbody')[0];
+                    tabelaBody.innerHTML= ''
+                    podaci.map((podatak) => {
+                        
+                        var red = tabelaBody.insertRow(-1);
+
+                        // Postavljanje ćelija u redu
+                        var celijaIme = red.insertCell(0);
+                        celijaIme.innerHTML = podatak.Ime;
+
+                        var celijaPrezime = red.insertCell(1);
+                        celijaPrezime.innerHTML = podatak.Prezime;
+
+                        var celijaKolona1 = red.insertCell(2);
+                        celijaKolona1.innerHTML = podatak.BrojDanaPrisustva;
+
+                        var celijaKolona2 = red.insertCell(3);
+                        celijaKolona2.innerHTML = podatak.BrojDanaGodisnjegOdmora;
+
+                        var celijaKolona3 = red.insertCell(4);
+                        celijaKolona3.innerHTML = podatak.BrojDanaBolovanja;
+
+                        var celijaKolona4 = red.insertCell(5);
+                        celijaKolona4.innerHTML = podatak.BrojDanaPlacenogOdsustva;
+
+                        var celijaKolona5 = red.insertCell(6);
+                        celijaKolona5.innerHTML = podatak.BrojDanaSluzbenogPuta;
+
+                        var celijaKolona6 = red.insertCell(7);
+                        celijaKolona6.innerHTML = podatak.Ukupno;
+
+                    })
+                
+                },
+                error: function(xhr, status, error) {
+                    console.error("Greška prilikom slanja zahteva:", error);
+                }
+            });
+
+
+
+
+        })
+    </script>
+
+</body>
+</html>

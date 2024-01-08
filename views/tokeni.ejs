@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Dogadjaji</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+
+    <%- include('./navBar.ejs') %>
+<main class="mainIndex">
+    <div class="tokeni">
+        <h1>TOKENI</h1>
+        <a href="/dodajToken" class="dodajToken">Dodajte token</a>
+    </div>
+    <table id="podaciTabela">
+        <thead>
+          <tr>
+                  <th>Sifra kartice</th>
+                  <th>Rfid kod</th>
+                  <th>Validnost</th>
+                  <th>Uredio korisnik</th>
+                  <th>Zaposlenik</th>
+                  <th>Brisanje</th>
+                  <th>Dogadjaji tokena</th>
+              </tr>
+          </thead>
+          <tbody>
+            <%tokeni.map((token) => {%>
+                <tr>
+                    <td><%= token.sifra_kartice %></td>
+                    <td><%= token.rfid_kod %></td>
+                    <td><%= token.validnost_kartice %></td>
+                    <td><%= token.id_korisnika %></td>
+                    <td><%= token.sifra_zaposlenika %></td>
+                    <td style="display: flex; justify-content: space-around; align-items: center; text-transform: uppercase;">
+                        <form action=<%= "/obrisiToken/"+token.rfid_kod %> method="post">
+                        <button class="obrisiToken">Obrisi</button>
+                    </form> 
+                </td>
+                <td>
+                    <a href=<%= "/dogadjajiTokena/"+token.rfid_kod %>> Pregled </a>
+                </td>
+                </tr>
+        <%})%>
+    </tbody>
+
+    </main>
+
+</body>
+</html>

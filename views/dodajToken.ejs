@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forma sa unosom teksta</title>
+    <link rel="stylesheet" href="/stylesheets/style.css">
+</head>
+<body>
+    <%- include('./navBar.ejs') %>
+    <main class="mainIndex" style="display: flex; justify-content: center;">
+
+            <form class="forma-container" method="post" action="/dodajNoviToken">
+
+                <label for="sifra_kartice">Sira kartice:</label>
+                <input type="text" id="ime" name="sifra_kartice" placeholder="Unesite sifru kartice">
+        
+                <label for="rfid_kod">Rfid kod:</label>
+                <input type="text" id="prezime" name="rfid_kod" placeholder="Unesite rfid kod">
+                
+                <label for="validnost_kartice">Validnost:</label>
+                <input type="text" id="email" name="validnost_kartice" placeholder="Unesite validnost kartice">
+                
+                <label for="id_korisnika">Korisnik:</label>
+                <input type="text" id="telefon" name="id_korisnika" placeholder="Unesite id korisnika">
+                
+                <label for="sifra_zaposlenika">Zaposlenik:</label>
+                <input type="text" id="poruka" name="sifra_zaposlenika" placeholder="Unesite sifru zaposlenika">
+                
+                <button type="submit">Pošalji</button>
+            </form>
+</main>
+    
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Dogadjaji</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+
+    <%- include('./navBar.ejs') %>
+<main class="mainIndex">
+    <h1>DOGADJAJI TOKENA </h1>
+    <table id="podaciTabela">
+      <thead>
+        <tr>
+                <th>Id dogadjaja</th>
+                <th>Rfid kod</th>
+                <th>Sifra dogadjaja</th>
+                <th>Vrijeme dogadjaja</th>
+                <th>Serijski broj uredjaja</th>
+            </tr>
+        </thead>
+        <tbody>
+    <%dogadjaji.map((dogadjaj) => { %>
+      <tr>
+        <td><%= dogadjaj.id %></td>
+        <td><%= dogadjaj.rfid_kod %></td>
+        <td><%= dogadjaj.sifra_dogadjaja %></td>
+        <td><%= dogadjaj.datum_dogadjaja %></td>
+        <td><%= dogadjaj.serijski_broj %></td>
+      </tr>
+      <%})%>
+        </tbody>
+</main>
+
+</body>
+</html>

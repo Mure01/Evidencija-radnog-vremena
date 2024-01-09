@@ -1,19 +1,17 @@
 var express = require('express');
 var router = express.Router();
 var mysql = require('mysql2');
-// Konfiguracija za povezivanje na MySQL bazu
+require('dotenv').config();
 
 const pool = mysql.createPool({
-  host:'bazepodataka.ba',
-  user: 'student2318',
-  password: '17905',
-  database: 'student2318',
-  port:7306
+  host:process.env.HOST,
+  user: process.env.USER,
+  password: process.env.PASWWORD,
+  database: process.env.DATABASE,
+  port:process.env.PORT
 });
 
-/* GET home page. */
 router.get('/',function(req, res, next) {
-
      res.render('index');
 });
 
@@ -29,7 +27,6 @@ router.post('/dohvatiIzvjestaj', (req, res) => {
     res.send(results);
   })
 })
-//KRAJ IZVJESTAJ METODA
 
 router.get('/tokeni', (req, res) => {
 
